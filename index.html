@@ -4,85 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dominic Toretto Chatbot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #333;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        #chat-box {
-            width: 100%;
-            max-width: 600px;
-            height: 400px;
-            background-color: #444;
-            padding: 20px;
-            overflow-y: auto;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-        .chat-message {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-        }
-        .user-message {
-            justify-content: flex-end;
-        }
-        .bot-message {
-            justify-content: flex-start;
-        }
-        .message-content {
-            max-width: 80%;
-            padding: 10px;
-            border-radius: 10px;
-            background-color: #555;
-        }
-        .user-message .message-content {
-            background-color: #f0ad4e;
-            color: #333;
-        }
-        .bot-message img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .input-container {
-            display: flex;
-            width: 100%;
-            max-width: 600px;
-        }
-        input[type="text"] {
-            flex: 1;
-            padding: 10px;
-            border-radius: 5px 0 0 5px;
-            border: none;
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            background-color: #f0ad4e;
-            color: #333;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #ec971f;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
 </head>
 <body>
 
@@ -99,61 +22,5 @@
         <input type="text" id="userInput" placeholder="insira sua mensagem aqui...">
         <button onclick="sendMessage()">Enviar</button>
     </div>
-
-    <script>
-        async function sendMessage() {
-            const userInput = document.getElementById('userInput').value;
-            if (!userInput) return;
-
-            const chatBox = document.getElementById('chat-box');
-            
-            const userMessage = document.createElement('div');
-            userMessage.className = 'chat-message user-message';
-            const userMessageContent = document.createElement('div');
-            userMessageContent.className = 'message-content';
-            userMessageContent.textContent = userInput;
-            userMessage.appendChild(userMessageContent);
-            chatBox.appendChild(userMessage);
-
-            document.getElementById('userInput').value = '';
-
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            try {
-                const response = await fetch('/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ userInput }),
-                });
-
-                const data = await response.json();
-                const botResponse = data.response;
-
-                // Add bot response to chat box
-                const botMessage = document.createElement('div');
-                botMessage.className = 'chat-message bot-message';
-                
-                const botImg = document.createElement('img');
-                botImg.src = 'toretto01.jpg';
-                botImg.alt = 'Dominic Toretto';
-
-                const botMessageContent = document.createElement('div');
-                botMessageContent.className = 'message-content';
-                botMessageContent.textContent = botResponse;
-
-                botMessage.appendChild(botImg);
-                botMessage.appendChild(botMessageContent);
-                chatBox.appendChild(botMessage);
-
-                chatBox.scrollTop = chatBox.scrollHeight;
-
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-    </script>
-
 </body>
 </html>
