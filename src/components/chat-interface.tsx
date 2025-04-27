@@ -2,10 +2,10 @@
 
 import { useState, useRef, useEffect } from "react"
 import { Send, X } from "lucide-react"
-import { Button } from "@/app/components/ui/button"
-import { Input } from "@/app/components/ui/input"
-import ChatMessage from "@/app/components/chat-message"
-import TypingIndicator from "@/app/components/typing-indicator"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import ChatMessage from "@/components/chat-message"
+import TypingIndicator from "@/components/typing-indicator"
 import { cn } from "@/lib/utils"
 
 interface ChatMessageType {
@@ -165,7 +165,7 @@ export default function ChatInterface() {
             className="bg-amber-500 hover:bg-amber-600 text-black"
           >
             <Send size={18} className="mr-1" />
-            <span className="sr-only sm:not-sr-only sm:inline-block">Send</span>
+            <span className="sr-only sm:not-sr-only sm:inline-block">Enviar</span>
           </Button>
         </form>
       </div>
